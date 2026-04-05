@@ -5,372 +5,464 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Syifa Mardh - Modern Portfolio</title>
-  <script type="importmap">
-  {
-    "imports": {
-      "react": "https://esm.sh/react@18",
-      "react-dom/client": "https://esm.sh/react-dom@18/client"
-    }
-  }
-  </script>
-  <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
   <script src="https://cdn.tailwindcss.com"></script>
-  <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/js/all.min.js"></script>
+  <style>
+    .gradient-text {
+      background: linear-gradient(to right, #3b82f6, #a855f7);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+    
+    .section-title::after {
+      content: '';
+      position: absolute;
+      bottom: -16px;
+      left: 0;
+      width: 66%;
+      height: 6px;
+      background: linear-gradient(to right, #3b82f6, #a855f7);
+      border-radius: 4px;
+    }
+    
+    .modal {
+      display: none;
+      position: fixed;
+      inset: 0;
+      background: rgba(0, 0, 0, 0.7);
+      z-index: 50;
+      align-items: center;
+      justify-content: center;
+    }
+    
+    .modal.active {
+      display: flex;
+    }
+    
+    .hidden-project {
+      display: none;
+    }
+    
+    .hidden-project.show {
+      display: block;
+    }
+    
+    .hidden-cert {
+      display: none;
+    }
+    
+    .hidden-cert.show {
+      display: block;
+    }
+    
+    html {
+      scroll-behavior: smooth;
+    }
+  </style>
 </head>
 
 <body class="bg-[#fafcff] text-slate-900">
-  <div id="root"></div>
+  <!-- Navbar -->
+  <nav class="flex justify-between items-center px-6 md:px-8 py-4 bg-white/90 backdrop-blur-md border-b border-blue-200/25 sticky top-0 z-50">
+    <div class="font-extrabold text-2xl text-blue-800">
+      Syifa<span class="text-purple-800">Mardh</span>
+    </div>
 
-  <script type="text/babel" data-type="module">
-    import React, { useState } from "react";
-    import ReactDOM from "react-dom/client";
+    <div class="hidden md:flex gap-6">
+      <a href="#about" class="text-slate-700 font-medium hover:text-blue-500 transition">About</a>
+      <a href="#education" class="text-slate-700 font-medium hover:text-blue-500 transition">Education</a>
+      <a href="#skills" class="text-slate-700 font-medium hover:text-blue-500 transition">Skills</a>
+      <a href="#projects" class="text-slate-700 font-medium hover:text-blue-500 transition">Projects</a>
+      <a href="#certificate" class="text-slate-700 font-medium hover:text-blue-500 transition">Certificate</a>
+      <a href="#contact" class="text-slate-700 font-medium hover:text-blue-500 transition">Contact</a>
+    </div>
 
-    const Navbar = () => {
-      const [open, setOpen] = useState(false);
+    <button id="menuBtn" class="md:hidden text-2xl text-blue-800">
+      <i class="fas fa-bars" id="menuIcon"></i>
+    </button>
 
-      return (
-        <nav className="flex justify-between items-center px-6 md:px-8 py-4 bg-white/90 backdrop-blur-md border-b border-blue-200/25 sticky top-0 z-50">
-          <div className="font-extrabold text-2xl text-blue-800">
-            Syifa<span className="text-purple-800">Mardh</span>
-          </div>
+    <div id="mobileMenu" class="hidden absolute top-full left-0 w-full bg-white shadow-md flex flex-col items-center py-6 gap-4 md:hidden">
+      <a href="#about" class="mobile-link text-slate-700 font-medium hover:text-blue-500 transition">About</a>
+      <a href="#education" class="mobile-link text-slate-700 font-medium hover:text-blue-500 transition">Education</a>
+      <a href="#skills" class="mobile-link text-slate-700 font-medium hover:text-blue-500 transition">Skills</a>
+      <a href="#projects" class="mobile-link text-slate-700 font-medium hover:text-blue-500 transition">Projects</a>
+      <a href="#certificate" class="mobile-link text-slate-700 font-medium hover:text-blue-500 transition">Certificate</a>
+      <a href="#contact" class="mobile-link text-slate-700 font-medium hover:text-blue-500 transition">Contact</a>
+    </div>
+  </nav>
 
-          <div className="hidden md:flex gap-6">
-            {["about", "education", "skills", "projects", "certificate", "contact"].map(section => (
-              <a key={section} href={`#${section}`} className="text-slate-700 font-medium hover:text-blue-500 transition">
-                {section.charAt(0).toUpperCase() + section.slice(1)}
-              </a>
-            ))}
-          </div>
+  <!-- Hero -->
+  <section class="text-center py-24 bg-gradient-to-br from-white to-blue-50 rounded-b-3xl">
+    <h1 class="text-4xl md:text-5xl font-extrabold mb-4">
+      Hello, I'm <span class="text-blue-800">Syifa Mardhiyahtus Soleha</span>
+    </h1>
+    <p class="text-lg text-slate-600 mb-6">PPLG Student | Web Developer | Creative Thinker</p>
+    <a href="#projects" class="inline-block px-8 py-3 bg-blue-500 text-white rounded-3xl font-semibold shadow-md hover:bg-blue-600 transition">View Projects</a>
+  </section>
 
-          <button
-            className="md:hidden text-2xl text-blue-800"
-            onClick={() => setOpen(!open)}
-          >
-            <i className={open ? "fas fa-times" : "fas fa-bars"}></i>
-          </button>
+  <!-- About -->
+  <section id="about" class="max-w-6xl mx-auto px-6 py-20">
+    <h2 class="text-3xl font-bold mb-6 relative inline-block section-title">ABOUT ME</h2>
+    <div class="bg-white p-8 rounded-3xl shadow-sm flex flex-col md:flex-row items-center gap-6">
+      <img src="img/foto.png" alt="Syifa Mardhiyahtus Soleha" class="w-40 h-40 object-cover shadow-md rounded-full">
+      <p class="text-slate-700 md:text-left text-center">
+        I am passionate about the digital world, exploring endless possibilities through coding and design. I am Syifa, a student at SMK Wikrama Bogor (PPLG) who enjoys transforming creative ideas into real websites and applications. Laravel, JavaScript, and UI/UX are my tools to create meaningful and enjoyable digital experiences.
+      </p>
+    </div>
+  </section>
 
-          {open && (
-            <div className="absolute top-full left-0 w-full bg-white shadow-md flex flex-col items-center py-6 gap-4 md:hidden">
-              {["about", "education", "skills", "projects", "Certificate", "contact"].map(section => (
-                <a
-                  key={section}
-                  href={`#${section}`}
-                  onClick={() => setOpen(false)}
-                  className="text-slate-700 font-medium hover:text-blue-500 transition"
-                >
-                  {section.charAt(0).toUpperCase() + section.slice(1)}
-                </a>
-              ))}
-            </div>
-          )}
-        </nav>
-      );
-    };
+  <!-- Education -->
+  <section id="education" class="max-w-6xl mx-auto px-6 py-20">
+    <h2 class="text-3xl font-bold mb-6 relative inline-block section-title">EDUCATION</h2>
+    <div class="border-l-4 border-blue-500 pl-6 flex flex-col gap-8">
+      <div class="relative">
+        <h3 class="font-semibold text-xl">MI Sirojul Wildan</h3>
+        <p class="text-slate-600">Learned basic knowledge and developed curiosity about the world.</p>
+        <div class="text-blue-500 font-semibold text-sm mt-1">2015 - 2021</div>
+      </div>
+      <div class="relative">
+        <h3 class="font-semibold text-xl">SMP Negeri 2 Ciawi</h3>
+        <p class="text-slate-600">Started exploring computers and basic programming concepts, laying the foundation for future learning.</p>
+        <div class="text-blue-500 font-semibold text-sm mt-1">2021 - 2024</div>
+      </div>
+      <div class="relative">
+        <h3 class="font-semibold text-xl">SMK Wikrama Bogor</h3>
+        <p class="text-slate-600">Sharpened web development skills and built various digital projects as a tangible portfolio.</p>
+        <div class="text-blue-500 font-semibold text-sm mt-1">2024 - Present</div>
+      </div>
+    </div>
+  </section>
 
-    const Hero = () => (
-      <section className="text-center py-24 bg-gradient-to-br from-white to-blue-50 rounded-b-3xl">
-        <h1 className="text-4xl md:text-5xl font-extrabold mb-4">
-          Hello, I'm <span className="text-blue-800">Syifa Mardhiyahtus Soleha</span>
-        </h1>
-        <p className="text-lg text-slate-600 mb-6">PPLG Student | Web Developer | Creative Thinker</p>
-        <a href="#projects" className="inline-block px-8 py-3 bg-blue-500 text-white rounded-3xl font-semibold shadow-md hover:bg-blue-600 transition">View Projects</a>
-      </section>
-    );
+  <!-- Skills -->
+  <section id="skills" class="max-w-6xl mx-auto px-6 py-20">
+    <h2 class="text-3xl font-bold mb-10 relative inline-block section-title">SKILLS</h2>
 
-    const About = () => (
-      <section id="about" className="max-w-6xl mx-auto px-6 py-20">
-        <h2 className="text-3xl font-bold mb-6 relative inline-block 
-              after:absolute after:-bottom-4 after:left-0 
-              after:w-2/3 after:h-1.5 after:bg-gradient-to-r 
-              after:from-blue-500 after:to-purple-400 after:rounded-md">
-          ABOUT ME
-        </h2>
-        <div className="bg-white p-8 rounded-3xl shadow-sm flex flex-col md:flex-row items-center gap-6">
-          <img
-            src="img/foto.png"
-            alt="Syifa Mardhiyahtus Soleha"
-            className="w-40 h-40 object-cover shadow-md"
-          />
-          <p className="text-slate-700 md:text-left text-center">
-            I am passionate about the digital world, exploring endless possibilities through coding and design. I am Syifa, a student at SMK Wikrama Bogor (PPLG) who enjoys transforming creative ideas into real websites and applications. Laravel, JavaScript, and UI/UX are my tools to create meaningful and enjoyable digital experiences.
-          </p>
+    <div class="mb-10">
+      <h3 class="text-xl font-semibold mb-4 text-blue-700">HARD SKILLS</h3>
+      <div class="flex flex-wrap gap-3 bg-white p-6 rounded-3xl shadow-sm">
+        <span class="flex items-center bg-blue-50 hover:bg-blue-100 transition px-4 py-2 rounded-full text-blue-700 font-medium">
+          <img src="img/html1.png" class="w-10 h-10 object-contain mr-1" alt="HTML">
+          <span class="leading-none">HTML</span>
+        </span>
+        <span class="flex items-center bg-blue-50 hover:bg-blue-100 transition px-4 py-2 rounded-full text-blue-700 font-medium">
+          <img src="img/csslogo.png" class="w-10 h-10 object-contain mr-1" alt="CSS">
+          <span class="leading-none">CSS</span>
+        </span>
+        <span class="flex items-center bg-blue-50 hover:bg-blue-100 transition px-4 py-2 rounded-full text-blue-700 font-medium">
+          <img src="img/jslogo.png" class="w-10 h-10 object-contain mr-1" alt="JavaScript">
+          <span class="leading-none">JavaScript</span>
+        </span>
+        <span class="flex items-center bg-blue-50 hover:bg-blue-100 transition px-4 py-2 rounded-full text-blue-700 font-medium">
+          <img src="img/phplogo.png" class="w-10 h-10 object-contain mr-1" alt="PHP">
+          <span class="leading-none">PHP</span>
+        </span>
+        <span class="flex items-center bg-blue-50 hover:bg-blue-100 transition px-4 py-2 rounded-full text-blue-700 font-medium">
+          <img src="img/laravellogo.png" class="w-10 h-10 object-contain mr-1" alt="Laravel">
+          <span class="leading-none">Laravel</span>
+        </span>
+        <span class="flex items-center bg-blue-50 hover:bg-blue-100 transition px-4 py-2 rounded-full text-blue-700 font-medium">
+          <img src="img/reactlogo.png" class="w-10 h-10 object-contain mr-1" alt="React">
+          <span class="leading-none">React</span>
+        </span>
+        <span class="flex items-center bg-blue-50 hover:bg-blue-100 transition px-4 py-2 rounded-full text-blue-700 font-medium">
+          <img src="img/bootstraplogo.png" class="w-10 h-10 object-contain mr-1" alt="Bootstrap">
+          <span class="leading-none">Bootstrap</span>
+        </span>
+        <span class="flex items-center bg-blue-50 hover:bg-blue-100 transition px-4 py-2 rounded-full text-blue-700 font-medium">
+          <img src="img/tailwindlogo.png" class="w-10 h-10 object-contain mr-1" alt="Tailwind CSS">
+          <span class="leading-none">Tailwind CSS</span>
+        </span>
+        <span class="flex items-center bg-blue-50 hover:bg-blue-100 transition px-4 py-2 rounded-full text-blue-700 font-medium">
+          <img src="img/figmalogo.png" class="w-10 h-10 object-contain mr-1" alt="Figma">
+          <span class="leading-none">Figma</span>
+        </span>
+        <span class="flex items-center bg-blue-50 hover:bg-blue-100 transition px-4 py-2 rounded-full text-blue-700 font-medium">
+          <img src="img/mongodblogo.png" class="w-10 h-10 object-contain mr-1" alt="MongoDB">
+          <span class="leading-none">MongoDB</span>
+        </span>
+        <span class="flex items-center bg-blue-50 hover:bg-blue-100 transition px-4 py-2 rounded-full text-blue-700 font-medium">
+          <img src="img/mysqllogo.png" class="w-10 h-10 object-contain mr-1" alt="MySQL">
+          <span class="leading-none">MySQL</span>
+        </span>
+        <span class="flex items-center bg-blue-50 hover:bg-blue-100 transition px-4 py-2 rounded-full text-blue-700 font-medium">
+          <img src="img/flutterlogo.png" class="w-10 h-10 object-contain mr-1" alt="Flutter">
+          <span class="leading-none">Flutter</span>
+        </span>
+      </div>
+    </div>
+
+    <div>
+      <h3 class="text-xl font-semibold mb-4 text-purple-700">SOFT SKILLS</h3>
+      <div class="flex flex-wrap gap-3 bg-white p-6 rounded-3xl shadow-sm">
+        <span class="bg-purple-50 hover:bg-purple-100 transition px-4 py-2 rounded-full text-purple-700 font-medium">Communication</span>
+        <span class="bg-purple-50 hover:bg-purple-100 transition px-4 py-2 rounded-full text-purple-700 font-medium">Teamwork</span>
+        <span class="bg-purple-50 hover:bg-purple-100 transition px-4 py-2 rounded-full text-purple-700 font-medium">Problem Solving</span>
+        <span class="bg-purple-50 hover:bg-purple-100 transition px-4 py-2 rounded-full text-purple-700 font-medium">Responsibility</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- Projects -->
+  <section id="projects" class="max-w-6xl mx-auto px-6 py-20">
+    <h2 class="text-3xl font-bold mb-6 relative inline-block section-title">PROJECT</h2>
+    <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8">
+      <div class="bg-white p-4 rounded-3xl shadow-sm hover:shadow-lg transition">
+        <img src="img/ghibli.png" class="w-full h-40 object-cover rounded-2xl mb-4" alt="Ghibli Studio">
+        <h3 class="font-semibold">Ghibli Studio</h3>
+        <p class="text-blue-500 text-sm mt-1">React JS • Tailwind • REST API • Vite</p>
+      </div>
+      <div class="bg-white p-4 rounded-3xl shadow-sm hover:shadow-lg transition">
+        <img src="img/portofolio.png" class="w-full h-40 object-cover rounded-2xl mb-4" alt="Portfolio Website V1">
+        <h3 class="font-semibold">Portfolio Website V1</h3>
+        <p class="text-blue-500 text-sm mt-1">HTML • CSS • JS</p>
+      </div>
+      <div class="bg-white p-4 rounded-3xl shadow-sm hover:shadow-lg transition">
+        <img src="img/tiketpesawat.png" class="w-full h-40 object-cover rounded-2xl mb-4" alt="Tiket Pesawat Garuda Airline">
+        <h3 class="font-semibold">Tiket Pesawat Garuda Airline</h3>
+        <p class="text-blue-500 text-sm mt-1">Laravel • Bootstrap</p>
+      </div>
+      <div class="hidden-project bg-white p-4 rounded-3xl shadow-sm hover:shadow-lg transition">
+        <img src="img/projekpsat.png" class="w-full h-40 object-cover rounded-2xl mb-4" alt="Cek Keterangan Nilai">
+        <h3 class="font-semibold">Cek Keterangan Nilai</h3>
+        <p class="text-blue-500 text-sm mt-1">HTML • CSS • PHP</p>
+      </div>
+    </div>
+    <div class="text-center mt-8">
+      <button id="toggleProjects" class="px-6 py-3 bg-blue-500 text-white rounded-3xl font-semibold shadow-md hover:bg-blue-600 transition">View All Projects</button>
+    </div>
+  </section>
+
+  <!-- Certificate -->
+  <section id="certificate" class="max-w-6xl mx-auto px-6 py-20">
+    <h2 class="text-3xl font-bold mb-6 relative inline-block section-title">CERTIFICATE</h2>
+    <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8">
+      <div class="bg-white p-4 rounded-3xl shadow-sm hover:shadow-lg transition">
+        <img src="img/web.png" class="cert-img w-full h-40 object-contain bg-white rounded-2xl mb-4 cursor-pointer" alt="Belajar Dasar Pemrograman Web">
+        <h3 class="font-semibold">Belajar Dasar Pemrograman Web</h3>
+        <p class="text-blue-500 text-sm mt-1">Dicoding</p>
+      </div>
+      <div class="bg-white p-4 rounded-3xl shadow-sm hover:shadow-lg transition">
+        <img src="img/git.png" class="cert-img w-full h-40 object-contain bg-white rounded-2xl mb-4 cursor-pointer" alt="Belajar Dasar Git dengan Github">
+        <h3 class="font-semibold">Belajar Dasar Git dengan Github</h3>
+        <p class="text-blue-500 text-sm mt-1">Dicoding</p>
+      </div>
+      <div class="bg-white p-4 rounded-3xl shadow-sm hover:shadow-lg transition">
+        <img src="img/webjavascript.png" class="cert-img w-full h-40 object-contain bg-white rounded-2xl mb-4 cursor-pointer" alt="Belajar Dasar Pemrograman Javascript">
+        <h3 class="font-semibold">Belajar Dasar Pemrograman Javascript</h3>
+        <p class="text-blue-500 text-sm mt-1">Dicoding</p>
+      </div>
+      <div class="hidden-cert bg-white p-4 rounded-3xl shadow-sm hover:shadow-lg transition">
+        <img src="img/programming101.png" class="cert-img w-full h-40 object-contain bg-white rounded-2xl mb-4 cursor-pointer" alt="Pengenalan Ke Logika Pemrograman">
+        <h3 class="font-semibold">Pengenalan Ke Logika Pemrograman (Programming Logic 101)</h3>
+        <p class="text-blue-500 text-sm mt-1">Dicoding</p>
+      </div>
+      <div class="hidden-cert bg-white p-4 rounded-3xl shadow-sm hover:shadow-lg transition">
+        <img src="img/Ai.png" class="cert-img w-full h-40 object-contain bg-white rounded-2xl mb-4 cursor-pointer" alt="Belajar Dasar AI">
+        <h3 class="font-semibold">Belajar Dasar AI</h3>
+        <p class="text-blue-500 text-sm mt-1">Dicoding</p>
+      </div>
+      <div class="hidden-cert bg-white p-4 rounded-3xl shadow-sm hover:shadow-lg transition">
+        <img src="img/financial.png" class="cert-img w-full h-40 object-contain bg-white rounded-2xl mb-4 cursor-pointer" alt="Introduction to Financial Literacy">
+        <h3 class="font-semibold">Introduction to Financial Literacy</h3>
+        <p class="text-blue-500 text-sm mt-1">Dicoding</p>
+      </div>
+      <div class="hidden-cert bg-white p-4 rounded-3xl shadow-sm hover:shadow-lg transition">
+        <img src="img/wordpress.png" class="cert-img w-full h-40 object-contain bg-white rounded-2xl mb-4 cursor-pointer" alt="WordPress Introduction">
+        <h3 class="font-semibold">WordPress Introduction</h3>
+        <p class="text-blue-500 text-sm mt-1">MySkill</p>
+      </div>
+      <div class="hidden-cert bg-white p-4 rounded-3xl shadow-sm hover:shadow-lg transition">
+        <img src="img/excel.png" class="cert-img w-full h-40 object-contain bg-white rounded-2xl mb-4 cursor-pointer" alt="Index Match, Vlookup and Hlookup">
+        <h3 class="font-semibold">Index Match, Vlookup and Hlookup</h3>
+        <p class="text-blue-500 text-sm mt-1">MySkill</p>
+      </div>
+      <div class="hidden-cert bg-white p-4 rounded-3xl shadow-sm hover:shadow-lg transition">
+        <img src="img/Ux.png" class="cert-img w-full h-40 object-contain bg-white rounded-2xl mb-4 cursor-pointer" alt="UX Writing Introduction">
+        <h3 class="font-semibold">UX Writing Introduction</h3>
+        <p class="text-blue-500 text-sm mt-1">MySkill</p>
+      </div>
+      <div class="hidden-cert bg-white p-4 rounded-3xl shadow-sm hover:shadow-lg transition">
+        <img src="img/igdx.png" class="cert-img w-full h-40 object-contain bg-white rounded-2xl mb-4 cursor-pointer" alt="IGDX Career Seminar">
+        <h3 class="font-semibold">IGDX Career Seminar</h3>
+        <p class="text-blue-500 text-sm mt-1">IGDX</p>
+      </div>
+      <div class="hidden-cert bg-white p-4 rounded-3xl shadow-sm hover:shadow-lg transition">
+        <img src="img/micro.png" class="cert-img w-full h-40 object-contain bg-white rounded-2xl mb-4 cursor-pointer" alt="Konsep Pemrograman Micro Skill">
+        <h3 class="font-semibold">Konsep Pemrograman Micro Skill Digital Talent Scholarship 2025</h3>
+        <p class="text-blue-500 text-sm mt-1">KOMDIGI</p>
+      </div>
+      <div class="hidden-cert bg-white p-4 rounded-3xl shadow-sm hover:shadow-lg transition">
+        <img src="img/k3.png" class="cert-img w-full h-40 object-contain bg-white rounded-2xl mb-4 cursor-pointer" alt="Keselamatan dan Kesehatan Kerja">
+        <h3 class="font-semibold">Keselamatan dan Kesehatan Kerja</h3>
+        <p class="text-blue-500 text-sm mt-1">ILO</p>
+      </div>
+      <div class="hidden-cert bg-white p-4 rounded-3xl shadow-sm hover:shadow-lg transition">
+        <img src="img/htmlcss.png" class="cert-img w-full h-40 object-contain bg-white rounded-2xl mb-4 cursor-pointer" alt="Belajar Dasar-Dasar HTML dan CSS">
+        <h3 class="font-semibold">Belajar Dasar-Dasar HTML dan CSS</h3>
+        <p class="text-blue-500 text-sm mt-1">CODE POLITAN</p>
+      </div>
+    </div>
+    <div class="text-center mt-8">
+      <button id="toggleCerts" class="px-6 py-3 bg-blue-500 text-white rounded-3xl font-semibold shadow-md hover:bg-blue-600 transition">Lihat Semua Sertifikat</button>
+    </div>
+  </section>
+
+  <!-- Certificate Modal -->
+  <div id="certModal" class="modal">
+    <img id="modalImg" class="max-w-[90%] max-h-[90%] rounded-xl shadow-lg" src="" alt="Certificate">
+  </div>
+
+  <!-- Contact -->
+  <section id="contact" class="max-w-6xl mx-auto px-6 py-20">
+    <h2 class="text-center text-3xl font-bold mb-10">CONTACT</h2>
+    <div class="flex flex-wrap justify-center gap-6">
+      <a href="mailto:syifa11409@gmail.com" target="_blank" class="bg-white p-6 rounded-3xl shadow-md hover:shadow-lg transition min-w-[180px] text-center flex flex-col items-center justify-center">
+        <div class="w-16 h-16 bg-blue-50 text-blue-500 text-2xl flex items-center justify-center rounded-full mb-4">
+          <i class="fas fa-envelope"></i>
         </div>
-      </section>
-    );
-
-    const Education = () => {
-      const timeline = [
-        { school: "MI Sirojul Wildan", desc: "Learned basic knowledge and developed curiosity about the world.", year: "2015 - 2021" },
-        { school: "SMP Negeri 2 Ciawi", desc: "Started exploring computers and basic programming concepts, laying the foundation for future learning.", year: "2021 - 2024" },
-        { school: "SMK Wikrama Bogor", desc: "Sharpened web development skills and built various digital projects as a tangible portfolio.", year: "2024 - Present" }
-      ];
-      return (
-        <section id="education" className="max-w-6xl mx-auto px-6 py-20">
-          <h2 className="text-3xl font-bold mb-6 relative inline-block after:absolute after:-bottom-4 after:left-0 after:w-2/3 after:h-1.5 after:bg-gradient-to-r after:from-blue-500 after:to-purple-400 after:rounded-md">EDUCATION</h2>
-          <div className="border-l-4 border-blue-500 pl-6 flex flex-col gap-8">
-            {timeline.map((item, i) => (
-              <div key={i} className="relative">
-                <h3 className="font-semibold text-xl">{item.school}</h3>
-                <p className="text-slate-600">{item.desc}</p>
-                <div className="text-blue-500 font-semibold text-sm mt-1">{item.year}</div>
-              </div>
-            ))}
-          </div>
-        </section>
-      );
-    };
-
-    const Skills = () => {
-      const hardSkills = [
-        { title: "HTML", img: "img/html1.png" },
-        { title: "CSS", img: "img/csslogo.png" },
-        { title: "JavaScript", img: "img/jslogo.png" },
-        { title: "PHP", img: "img/phplogo.png" },
-        { title: "Laravel", img: "img/laravellogo.png" },
-        { title: "React", img: "img/reactlogo.png" },
-        { title: "Bootstrap", img: "img/bootstraplogo.png" },
-        { title: "Tailwind CSS", img: "img/tailwindlogo.png" },
-        { title: "Figma", img: "img/figmalogo.png" },
-        { title: "MongoDB", img: "img/mongodblogo.png" },
-        { title: "MySQL", img: "img/mysqllogo.png" },
-        { title: "Flutter", img: "img/flutterlogo.png" },
-      ];
-
-      const softSkills = [
-        "Communication",
-        "Teamwork",
-        "Problem Solving",
-        "Responsibility",
-      ];
-
-      return (
-        <section id="skills" className="max-w-6xl mx-auto px-6 py-20">
-          <h2 className="text-3xl font-bold mb-10 relative inline-block after:absolute after:-bottom-4 after:left-0 after:w-2/3 after:h-1.5 after:bg-gradient-to-r after:from-blue-500 after:to-purple-400 after:rounded-md">
-            SKILLS
-          </h2>
-
-          <div className="mb-10">
-            <h3 className="text-xl font-semibold mb-4 text-blue-700">
-              HARD SKILLS
-            </h3>
-            <div className="flex flex-wrap gap-3 bg-white p-6 rounded-3xl shadow-sm">
-              {hardSkills.map((s, i) => (
-                <span
-                  key={i}
-                  className="flex items-center bg-blue-50 hover:bg-blue-100 transition px-4 py-2 rounded-full text-blue-700 font-medium"
-                >
-                  {s.img && (
-                    <img
-                      src={s.img}
-                      className="w-10 h-10 object-contain mr-1"
-                    />
-                  )}
-                  <span className="leading-none">{s.title}</span>
-                </span>
-              ))}
-            </div>
-          </div>
-
-          <div>
-            <h3 className="text-xl font-semibold mb-4 text-purple-700">
-              SOFT SKILLS
-            </h3>
-            <div className="flex flex-wrap gap-3 bg-white p-6 rounded-3xl shadow-sm">
-              {softSkills.map((s, i) => (
-                <span
-                  key={i}
-                  className="bg-purple-50 hover:bg-purple-100 transition px-4 py-2 rounded-full text-purple-700 font-medium"
-                >
-                  {s}
-                </span>
-              ))}
-            </div>
-          </div>
-        </section>
-      );
-    };
-
-    const Projects = () => {
-      const [showAll, setShowAll] = useState(false);
-      const projects = [
-        { title: "Ghibli Studio", tech: "React JS • Tailwind • REST API • Vite ", img: "img/ghibli.png" },
-        { title: "Portfolio Website V1", tech: "HTML • CSS • JS", img: "img/portofolio.png" },
-        { title: "Tiket Pesawat Garuda Airline", tech: "Laravel • Bootstrap", img: "img/tiketpesawat.png" },
-        { title: "Cek Keterangan Nilai", tech: "HTML • CSS • PHP ", img: "img/projekpsat.png", more: true },
-      ];
-      return (
-        <section id="projects" className="max-w-6xl mx-auto px-6 py-20">
-          <h2 className="text-3xl font-bold mb-6 relative inline-block after:absolute after:-bottom-4 after:left-0 after:w-2/3 after:h-1.5 after:bg-gradient-to-r after:from-blue-500 after:to-purple-400 after:rounded-md">PROJECT</h2>
-          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8">
-            {projects.map((p, i) => {
-              if (p.more && !showAll) return null;
-              return (
-                <div key={i} className="bg-white p-4 rounded-3xl shadow-sm hover:shadow-lg transition">
-                  <img src={p.img} className="w-full h-40 object-cover rounded-2xl mb-4" alt={p.title} />
-                  <h3 className="font-semibold">{p.title}</h3>
-                  <p className="text-blue-500 text-sm mt-1">{p.tech}</p>
-                  <button></button>
-                </div>
-              )
-            })}
-          </div>
-          <div className="text-center mt-8">
-            <button onClick={() => setShowAll(!showAll)} className="px-6 py-3 bg-blue-500 text-white rounded-3xl font-semibold shadow-md hover:bg-blue-600 transition">{showAll ? "Hide Projects" : "View All Projects"}</button>
-          </div>
-        </section>
-      );
-    };
-
-    const Certificate = () => {
-      const [showAll, setShowAll] = useState(false);
-      const [selectedImg, setSelectedImg] = useState(null);
-      const certs = [
-        { title: "Belajar Dasar Pemrograman Web", program: "Dicoding", img: "img/web.png" },
-        { title: "Belajar Dasar Git dengan Github", program: "Dicoding", img: "img/git.png" },
-        { title: "Belajar Dasar Pemrograman Javascript", program: "Dicoding", img: "img/webjavascript.png" },
-        { title: "Pengenalan Ke Logika Pemrograman (Programming Logic 101)", program: "Dicoding", img: "img/programming101.png", more: true },
-        { title: "Belajar Dasar AI", program: "Dicoding", img: "img/Ai.png", more: true },
-        { title: "Introduction to Financial Literacy", program: "Dicoding", img: "img/financial.png", more: true },
-        { title: "WordPress Intoduction", program: "MySkill", img: "img/wordpress.png", more: true },
-        { title: "Index Match, Vlookup and Hlookup", program: "MySkill", img: "img/excel.png", more: true },
-        { title: "UX Writing Intorduction", program: "MySkill", img: "img/Ux.png", more: true },
-        { title: "IGDX Career Seminar", program: "IGDX", img: "img/igdx.png", more: true },
-        { title: "Konsep Pemrograman Micro Skill Digital Talent Scholarship 2025", program: "KOMDIGI", img: "img/micro.png", more: true },
-        { title: "Keselamatan dan Kesehatan Kerja", program: "ILO", img: "img/k3.png", more: true },
-        { title: "Belajar Dasar-Dasar HTML dan CSS", program: "CODE POLITAN", img: "img/htmlcss.png", more: true },
-
-      ];
-      return (
-        <section id="certificate" className="max-w-6xl mx-auto px-6 py-20">
-          <h2 className="text-3xl font-bold mb-6 relative inline-block after:absolute after:-bottom-4 after:left-0 after:w-2/3 after:h-1.5 after:bg-gradient-to-r after:from-blue-500 after:to-purple-400 after:rounded-md">CERTIFICATE</h2>
-          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8">
-            {certs.map((c, i) => {
-              if (c.more && !showAll) return null;
-              return (
-                <div key={i} className="bg-white p-4 rounded-3xl shadow-sm hover:shadow-lg transition">
-                  <img
-                    src={c.img}
-                    onClick={() => setSelectedImg(c.img)}
-                    className="w-full h-40 object-contain bg-white rounded-2xl mb-4 cursor-pointer"
-                    alt={c.title}
-                  />
-                  <h3 className="font-semibold">{c.title}</h3>
-                  <p className="text-blue-500 text-sm mt-1">{c.program}</p>
-                </div>
-              )
-            })}
-            {selectedImg && (
-              <div
-                className="fixed inset-0 bg-black/70 flex items-center justify-center z-50"
-                onClick={() => setSelectedImg(null)}
-              >
-                <img
-                  src={selectedImg}
-                  className="max-w-[90%] max-h-[90%] rounded-xl shadow-lg"
-                />
-              </div>
-            )}
-          </div>
-          <div className="text-center mt-8">
-            <button onClick={() => setShowAll(!showAll)} className="px-6 py-3 bg-blue-500 text-white rounded-3xl font-semibold shadow-md hover:bg-blue-600 transition">{showAll ? "Tutup Sertifikat" : "Lihat Semua Sertifikat"}</button>
-          </div>
-        </section>
-      );
-    };
-
-    const Contact = () => {
-      const contacts = [
-        { icon: "fas fa-envelope", title: "Email", info: "syifa11409@gmail.com", link: "mailto:syifa11409@gmail.com" },
-        { icon: "fab fa-instagram", title: "Instagram", info: "@syifamardh", link: "https://www.instagram.com/syifamardh/" },
-        { icon: "fab fa-github-alt", title: "GitHub", info: "sipappallee", link: "https://github.com/sipappallee" },
-        { icon: "fab fa-linkedin-in", title: "LinkedIn", info: "Syifa Mardhiyahtus", link: "https://www.linkedin.com/in/syifa-mardhiyahtus-soleha-a152b335a/" },
-      ];
-      return (
-        <section id="contact" className="max-w-6xl mx-auto px-6 py-20">
-          <h2 className="text-center text-3xl font-bold mb-10"> CONTACT</h2>
-          <div className="flex flex-wrap justify-center gap-6">
-            {contacts.map((c, i) => (
-              <a
-                key={i}
-                href={c.link}
-                target="_blank"
-                className="bg-white p-6 rounded-3xl shadow-md hover:shadow-lg transition min-w-[180px] text-center flex flex-col items-center justify-center"
-              >
-                <div className="w-16 h-16 bg-blue-50 text-blue-500 text-2xl flex items-center justify-center rounded-full mb-4">
-                  <i className={c.icon}></i>
-                </div>
-                <h4 className="font-semibold text-lg mb-1">{c.title}</h4>
-                <p className="text-slate-600">{c.info}</p>
-              </a>
-            ))}
-          </div>
-        </section>
-      );
-    };
-
-    const socialLinks = [
-      { icon: "fab fa-instagram", link: "https://www.instagram.com/syifamardh/" },
-      { icon: "fab fa-github", link: "https://github.com/sipappallee" },
-      { icon: "fab fa-linkedin-in", link: "https://www.linkedin.com/in/syifa-mardhiyahtus-soleha-a152b335a/" },
-    ];
-
-    const Footer = () => (
-      <footer className="bg-gradient-to-r from-slate-900 to-slate-800 text-slate-300 py-16 rounded-t-3xl">
-        <div className="max-w-6xl mx-auto px-6 flex flex-col gap-6">
-
-          <div className="flex justify-between items-center border-b border-white/10 pb-6 flex-wrap gap-4">
-            <div className="text-2xl font-extrabold bg-clip-text bg-gradient-to-r from-blue-400 to-purple-400 text-transparent">
-              Syifa<span className="text-purple-400">Mardh</span>
-            </div>
-
-            <div className="flex gap-4">
-              {socialLinks.map((item, i) => (
-                <a
-                  key={i}
-                  href={item.link}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="w-11 h-11 bg-white/10 rounded-full flex items-center justify-center text-gray-300 hover:bg-blue-500 hover:text-white transition"
-                >
-                  <i className={item.icon}></i>
-                </a>
-              ))}
-            </div>
-          </div>
-
-          <div className="flex justify-center gap-6 flex-wrap">
-            {["about", "education", "skills", "projects", "certificate", "contact"].map((sec, i) => (
-              <a key={i} href={`#${sec}`} className="text-gray-400 hover:text-blue-400 transition">
-                {sec.charAt(0).toUpperCase() + sec.slice(1)}
-              </a>
-            ))}
-          </div>
-
-          <div className="text-center text-sm text-gray-400 border-t border-white/5 pt-4 mt-4">
-            © 2026 Syifa Mardhiyahtus Soleha
-          </div>
-
+        <h4 class="font-semibold text-lg mb-1">Email</h4>
+        <p class="text-slate-600">syifa11409@gmail.com</p>
+      </a>
+      <a href="https://www.instagram.com/syifamardh/" target="_blank" class="bg-white p-6 rounded-3xl shadow-md hover:shadow-lg transition min-w-[180px] text-center flex flex-col items-center justify-center">
+        <div class="w-16 h-16 bg-blue-50 text-blue-500 text-2xl flex items-center justify-center rounded-full mb-4">
+          <i class="fab fa-instagram"></i>
         </div>
-      </footer>
-    );
+        <h4 class="font-semibold text-lg mb-1">Instagram</h4>
+        <p class="text-slate-600">@syifamardh</p>
+      </a>
+      <a href="https://github.com/sipappallee" target="_blank" class="bg-white p-6 rounded-3xl shadow-md hover:shadow-lg transition min-w-[180px] text-center flex flex-col items-center justify-center">
+        <div class="w-16 h-16 bg-blue-50 text-blue-500 text-2xl flex items-center justify-center rounded-full mb-4">
+          <i class="fab fa-github-alt"></i>
+        </div>
+        <h4 class="font-semibold text-lg mb-1">GitHub</h4>
+        <p class="text-slate-600">sipappallee</p>
+      </a>
+      <a href="https://www.linkedin.com/in/syifa-mardhiyahtus-soleha-a152b335a/" target="_blank" class="bg-white p-6 rounded-3xl shadow-md hover:shadow-lg transition min-w-[180px] text-center flex flex-col items-center justify-center">
+        <div class="w-16 h-16 bg-blue-50 text-blue-500 text-2xl flex items-center justify-center rounded-full mb-4">
+          <i class="fab fa-linkedin-in"></i>
+        </div>
+        <h4 class="font-semibold text-lg mb-1">LinkedIn</h4>
+        <p class="text-slate-600">Syifa Mardhiyahtus</p>
+      </a>
+    </div>
+  </section>
 
-    const App = () => (
-      <>
-        <Navbar />
-        <Hero />
-        <About />
-        <Education />
-        <Skills />
-        <Projects />
-        <Certificate />
-        <Contact />
-        <Footer />
-      </>
-    );
+  <!-- Footer -->
+  <footer class="bg-gradient-to-r from-slate-900 to-slate-800 text-slate-300 py-16 rounded-t-3xl">
+    <div class="max-w-6xl mx-auto px-6 flex flex-col gap-6">
+      <div class="flex justify-between items-center border-b border-white/10 pb-6 flex-wrap gap-4">
+        <div class="text-2xl font-extrabold gradient-text">
+          Syifa<span class="text-purple-400">Mardh</span>
+        </div>
+        <div class="flex gap-4">
+          <a href="https://www.instagram.com/syifamardh/" target="_blank" class="w-11 h-11 bg-white/10 rounded-full flex items-center justify-center text-gray-300 hover:bg-blue-500 hover:text-white transition">
+            <i class="fab fa-instagram"></i>
+          </a>
+          <a href="https://github.com/sipappallee" target="_blank" class="w-11 h-11 bg-white/10 rounded-full flex items-center justify-center text-gray-300 hover:bg-blue-500 hover:text-white transition">
+            <i class="fab fa-github"></i>
+          </a>
+          <a href="https://www.linkedin.com/in/syifa-mardhiyahtus-soleha-a152b335a/" target="_blank" class="w-11 h-11 bg-white/10 rounded-full flex items-center justify-center text-gray-300 hover:bg-blue-500 hover:text-white transition">
+            <i class="fab fa-linkedin-in"></i>
+          </a>
+        </div>
+      </div>
+      <div class="flex justify-center gap-6 flex-wrap">
+        <a href="#about" class="text-gray-400 hover:text-blue-400 transition">About</a>
+        <a href="#education" class="text-gray-400 hover:text-blue-400 transition">Education</a>
+        <a href="#skills" class="text-gray-400 hover:text-blue-400 transition">Skills</a>
+        <a href="#projects" class="text-gray-400 hover:text-blue-400 transition">Projects</a>
+        <a href="#certificate" class="text-gray-400 hover:text-blue-400 transition">Certificate</a>
+        <a href="#contact" class="text-gray-400 hover:text-blue-400 transition">Contact</a>
+      </div>
+      <div class="text-center text-sm text-gray-400 border-t border-white/5 pt-4 mt-4">
+        © 2026 Syifa Mardhiyahtus Soleha
+      </div>
+    </div>
+  </footer>
 
-    const root = ReactDOM.createRoot(document.getElementById("root"));
-    root.render(<App />);
+  <script>
+    // Mobile menu toggle
+    const menuBtn = document.getElementById('menuBtn');
+    const mobileMenu = document.getElementById('mobileMenu');
+    const menuIcon = document.getElementById('menuIcon');
+    const mobileLinks = document.querySelectorAll('.mobile-link');
+    let isMenuOpen = false;
+
+    menuBtn.addEventListener('click', () => {
+      isMenuOpen = !isMenuOpen;
+      if (isMenuOpen) {
+        mobileMenu.classList.remove('hidden');
+        mobileMenu.classList.add('flex');
+        menuIcon.classList.remove('fa-bars');
+        menuIcon.classList.add('fa-times');
+      } else {
+        mobileMenu.classList.add('hidden');
+        mobileMenu.classList.remove('flex');
+        menuIcon.classList.remove('fa-times');
+        menuIcon.classList.add('fa-bars');
+      }
+    });
+
+    mobileLinks.forEach(link => {
+      link.addEventListener('click', () => {
+        isMenuOpen = false;
+        mobileMenu.classList.add('hidden');
+        mobileMenu.classList.remove('flex');
+        menuIcon.classList.remove('fa-times');
+        menuIcon.classList.add('fa-bars');
+      });
+    });
+
+    // Projects toggle
+    const toggleProjectsBtn = document.getElementById('toggleProjects');
+    const hiddenProjects = document.querySelectorAll('.hidden-project');
+    let showAllProjects = false;
+
+    toggleProjectsBtn.addEventListener('click', () => {
+      showAllProjects = !showAllProjects;
+      hiddenProjects.forEach(project => {
+        if (showAllProjects) {
+          project.classList.add('show');
+        } else {
+          project.classList.remove('show');
+        }
+      });
+      toggleProjectsBtn.textContent = showAllProjects ? 'Hide Projects' : 'View All Projects';
+    });
+
+    // Certificates toggle
+    const toggleCertsBtn = document.getElementById('toggleCerts');
+    const hiddenCerts = document.querySelectorAll('.hidden-cert');
+    let showAllCerts = false;
+
+    toggleCertsBtn.addEventListener('click', () => {
+      showAllCerts = !showAllCerts;
+      hiddenCerts.forEach(cert => {
+        if (showAllCerts) {
+          cert.classList.add('show');
+        } else {
+          cert.classList.remove('show');
+        }
+      });
+      toggleCertsBtn.textContent = showAllCerts ? 'Tutup Sertifikat' : 'Lihat Semua Sertifikat';
+    });
+
+    // Certificate modal
+    const certModal = document.getElementById('certModal');
+    const modalImg = document.getElementById('modalImg');
+    const certImgs = document.querySelectorAll('.cert-img');
+
+    certImgs.forEach(img => {
+      img.addEventListener('click', () => {
+        modalImg.src = img.src;
+        certModal.classList.add('active');
+      });
+    });
+
+    certModal.addEventListener('click', () => {
+      certModal.classList.remove('active');
+    });
   </script>
 </body>
 
